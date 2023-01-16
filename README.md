@@ -2,6 +2,8 @@
 
 Just a quick demo showing how to get these all working together, implementing @ISnackable's answer [here](https://github.com/shikijs/shiki/issues/398#issuecomment-1384042174).
 
+[Demo](https://next-13-shiki-typescript-example.vercel.app/)
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
