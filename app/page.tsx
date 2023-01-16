@@ -1,10 +1,36 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+import { highlight } from "@/lib/shiki";
+import { Inter } from "@next/font/google";
+import Image from "next/image";
+import styles from "./page.module.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+const sampleCode = `import * as React from 'react';
+import './App.css';
+import Hello from './components/Hello';
+
+const logo = require('./logo.svg');
+
+function App() {
+  return (
+    <div className="App">
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>Welcome to React</h2>
+      </div>
+      <p className="App-intro">
+        To get started, edit <code>src/App.tsx</code> and save to reload.
+      </p>
+      <Hello name="TypeScript" />
+    </div>
+  );
+}
+
+export default App;`;
+
+export default async function Home() {
+  const html = await highlight(sampleCode, "js");
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -18,7 +44,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
+            By{" "}
             <Image
               src="/vercel.svg"
               alt="Vercel Logo"
@@ -32,17 +58,7 @@ export default function Home() {
       </div>
 
       <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
 
       <div className={styles.grid}>
@@ -87,5 +103,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
